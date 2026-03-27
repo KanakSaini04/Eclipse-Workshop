@@ -1,0 +1,72 @@
+package com.app.helper;
+
+import java.util.Properties;
+import java.util.Random;
+
+import jakarta.mail.Authenticator;
+import jakarta.mail.Message;
+import jakarta.mail.MessagingException;
+import jakarta.mail.PasswordAuthentication;
+import jakarta.mail.Session;
+import jakarta.mail.Transport;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
+
+public class EmailUtil{
+    public static void main(String[] args) {
+
+        // Recipient email (can be any email in Mailtrap inbox)
+        String to = "sainikanak84@gmail.com";
+
+        // Sender email (Mailtrap provides this dummy domain)
+        String from = "eternalsupreme9@gmail.com";
+
+        // Mailtrap SMTP credentials
+        final String username = "eternalsupreme9@gmail.com";  // Mailtrap username
+        final String password = "mkcbvgdgbxupmbci"; // Mailtrap password / API key
+
+        // Mailtrap SMTP host
+        String host = "smtp.gmail.com";
+
+        // SMTP properties
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", host);
+        props.put("mail.smtp.port", "587");
+
+        // Create mail session
+        Session session = Session.getInstance(props,
+            new Authenticator() {
+                @Override
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(username, password);
+                }
+            });
+
+        try {
+            // Generate 6-digit OTP
+            int otp = 100000 + new Random().nextInt(900000);
+
+            // Create message
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(from));
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
+            message.setSubject("Your OTP Code");
+            message.setText("Your OTP is: " + otp);
+
+            // Send email
+            Transport.send(message);
+
+            System.out.println("✅ OTP Sent Successfully: " + otp);
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }
+
+	public static boolean sendRegisterOTP(String to, String username, int OTP) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+}

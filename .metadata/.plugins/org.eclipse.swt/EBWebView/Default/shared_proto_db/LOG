@@ -1,0 +1,4 @@
+2025/11/05-23:11:31.206 6470 Reusing MANIFEST G:\My Drive\eclipse-workspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\shared_proto_db/MANIFEST-000001
+2025/11/05-23:11:31.216 6470 Recovering log #3
+2025/11/05-23:11:31.219 6470 (ignoring error) G:\My Drive\eclipse-workspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\shared_proto_db/000003.log: dropping 406 bytes; Corruption: checksum mismatch
+2025/11/05-23:11:31.227 6470 Reusing old log G:\My Drive\eclipse-workspace\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\shared_proto_db/000003.log 

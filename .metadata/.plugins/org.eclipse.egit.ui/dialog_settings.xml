@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<list key="EGit.KnownHosts">
+		<item value="git.eclipse.org"/>
+		<item value="github.com"/>
+		<item value="bitbucket.org"/>
+	</list>
+	<list key="RepositorySelectionPage.UsedUris">
+		<item value="https://github.com/dynamicdev4all/Sec-F-2027/blob/main/SEC-F-APP/src/main/webapp/home.jsp"/>
+		<item value="https://github.com/dynamicdev4all/Sec-F-2027/blob/main/SEC-F-APP/src/main/webapp/WEB-INF/lib/jakarta.activation-2.0.1.jar"/>
+	</list>
+</section>

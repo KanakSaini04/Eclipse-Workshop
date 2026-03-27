@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login & Sign Up with OTP</title>
+
+  <!-- Link CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <!-- Login Form -->
+    <div id="loginForm">
+      <h2>Login</h2>
+      <form action="loginServlet" method="post">
+        <input type="text" name="username" placeholder="Username or Email" required />
+        <input type="password" name="password" placeholder="Password" required />
+        <button type="submit">Login</button>
+      </form>
+      <p>Don't have an account? <a onclick="showSignup()">Sign Up</a></p>
+    </div>
+
+    <!-- Sign Up Form -->
+    <div id="signupForm">
+      <h2>Sign Up</h2>
+      <form id="signupData">
+        <input type="text" id="username" name="username" placeholder="Username" required />
+        <input type="email" id="email" name="email" placeholder="Email" required />
+        <input type="text" id="phone" name="phone" placeholder="Phone Number" required />
+        <input type="password" id="password" name="password" placeholder="Password" required />
+        <button type="button" onclick="sendOTP()">Get OTP</button>
+      </form>
+      <p>Already have an account? <a onclick="showLogin()">Login</a></p>
+    </div>
+
+    <!-- OTP Form -->
+    <div id="otpForm">
+      <h2>Enter OTP</h2>
+      <p>OTP has been sent to your phone number.</p>
+      <input type="text" id="otpInput" placeholder="Enter OTP" required />
+      <button type="button" onclick="verifyOTP()">Verify & Sign Up</button>
+      <p><a onclick="showSignup()">Back</a></p>
+    </div>
+  </div>
+
+  <!-- Link JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>

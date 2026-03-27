@@ -1,0 +1,55 @@
+package com.app.helper;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+/**
+ * Servlet implementation class RegisterServelet
+ */
+@WebServlet("/RegisterServelet")
+public class RegisterServelet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public RegisterServelet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		String firstName = request.getParameter("firstName");
+		String lastName = request.getParameter("lastName");
+		String mobileNum = request.getParameter("mobile");
+		String emailAdd = request.getParameter("email");
+		String password = request.getParameter("password");
+		
+		int OTP = (int)(Math.random() * 900000) + 100000;
+		boolean OTPSentStatus = EmailUtil.sendRegisterOTP(emailAdd, firstName + " " + lastName, OTP);
+		if(OTPSentStatus) {
+			HttpSession session = request.getSession();
+			session.setAttribute("sentOTP", OTP); 
+			response.sendRedirect("verify_otp_page.html");
+		}else {
+			System.out.println("OTP sent Failed");
+		}
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}

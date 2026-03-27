@@ -1,0 +1,70 @@
+package com.app.helper;
+
+import java.util.Properties;
+import java.util.Random;
+
+import jakarta.mail.Authenticator;
+import jakarta.mail.Message;
+import jakarta.mail.MessagingException;
+import jakarta.mail.PasswordAuthentication;
+import jakarta.mail.Session;
+import jakarta.mail.Transport;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
+
+public class SendOTP {
+    public static void main(String[] args) {
+
+        // Recipient email
+        String to = "sainikanak84@gmail.com";
+
+        // Sender email
+        String from = "eternalsupreme9@gmail.com";
+
+        // Gmail SMTP credentials
+        final String username = "eternalsupreme9@gmail.com";  
+        final String password = "mkcbvgdgbxupmbci"; // ✅ must be Gmail App Password
+
+        String host = "smtp.gmail.com";
+
+        // SMTP properties
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", host);
+        props.put("mail.smtp.port", "587");
+
+        // Create mail session with authentication
+        Session session = Session.getInstance(props,
+            new Authenticator() {
+                @Override
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(username, password);
+                }
+            });
+
+        try {
+            // Generate 6-digit OTP
+            int otp = 100000 + new Random().nextInt(900000);
+
+            // Create message
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(from));
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
+            message.setSubject("Your OTP Code");
+            message.setText("Hello,\n\n"
+                    + "Your Account has been created successfully.\n"
+                    + "Your OTP is: " + otp + "\n\n"
+                    + "Note: Please do not share this OTP with anyone.\n");
+
+            // Send email
+            Transport.send(message);
+
+            System.out.println("✅ OTP Sent Successfully: " + otp);
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            System.out.println("❌ Email send Failed.");}
+        }
+    }
+}

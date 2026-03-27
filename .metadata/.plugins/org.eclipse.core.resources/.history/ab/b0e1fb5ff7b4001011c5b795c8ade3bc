@@ -1,0 +1,45 @@
+// Show signup form
+function showSignup() {
+  document.getElementById("loginForm").style.display = "none";
+  document.getElementById("signupForm").style.display = "block";
+  document.getElementById("otpForm").style.display = "none";
+}
+
+// Show login form
+function showLogin() {
+  document.getElementById("signupForm").style.display = "none";
+  document.getElementById("otpForm").style.display = "none";
+  document.getElementById("loginForm").style.display = "block";
+}
+
+// Show OTP form
+function sendOTP() {
+  let phone = document.getElementById("phone").value;
+  if (phone === "") {
+    alert("Please enter your phone number first.");
+    return;
+  }
+
+  // 🔹 Here you can call a servlet or API to send OTP
+  // Example: fetch('SendOTPServlet?phone=' + phone)
+  alert("OTP sent to " + phone);
+
+  document.getElementById("signupForm").style.display = "none";
+  document.getElementById("otpForm").style.display = "block";
+}
+
+// Verify OTP
+function verifyOTP() {
+  let otp = document.getElementById("otpInput").value;
+
+  // 🔹 Replace this with backend verification logic
+  if (otp === "1234") {
+    alert("Signup Successful!");
+    showLogin();
+  } else {
+    alert("Invalid OTP! Try again.");
+  }
+}
+
+// Show login first by default
+showLogin();

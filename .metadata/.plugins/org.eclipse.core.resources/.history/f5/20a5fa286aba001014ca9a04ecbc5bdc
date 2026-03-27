@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login & Signup — Modern</title>
+  <style>
+    :root {
+      --bg1: #0e3dbd;
+      --accent: #7c3aed;
+      --accent-2: #06b6d4;
+      --glass: rgba(131, 219, 193, 0.04);
+      --muted: rgba(242, 235, 235, 0.65);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial;
+      color: #e6eef8;
+      background: linear-gradient(135deg, var(--bg1), #010a22 60%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+    }
+
+    .container { width: 420px; max-width: 100%; }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+      padding: 28px;
+      border-radius: 14px;
+      box-shadow: 0 8px 30px rgba(115, 127, 236, 0.6);
+    }
+
+    .tabs { display: flex; gap: 8px; margin-bottom: 18px; }
+
+    .tab {
+      flex: 1;
+      padding: 10px;
+      border-radius: 10px;
+      text-align: center;
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--muted);
+      transition: all 0.2s ease;
+    }
+
+    .tab.active {
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      color: white;
+      box-shadow: 0 6px 18px rgba(7, 12, 34, 0.6);
+    }
+
+    form { display: grid; gap: 12px; }
+
+    .row { display: flex; gap: 12px; }
+
+    .input {
+      background: #045bdf;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      padding: 12px;
+      border-radius: 10px;
+      color: white;
+      width: 100%;
+    }
+
+    .input::placeholder { color: rgba(255, 255, 255, 0.45); }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 8px;
+    }
+
+    .btn {
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      border: none;
+      padding: 10px 14px;
+      border-radius: 10px;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .muted { color: var(--muted); font-size: 13px; }
+    .small { font-size: 13px; color: rgba(246, 243, 243, 0.918); }
+    .etr { font-size: 13px; color: rgba(189, 59, 59, 0.918); }
+
+    .input:focus { outline: none; box-shadow: 0 6px 18px rgba(143, 152, 192, 0.6); }
+    .tab:hover { transform: translateY(-2px); }
+    .btn:active { transform: scale(0.98); }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="card" id="authCard">
+      <div class="tabs">
+        <div class="tab active" id="tab-login">Login</div>
+        <div class="tab" id="tab-signup">Sign up</div>
+      </div>
+
+      <!-- LOGIN FORM -->
+      <form id="form-login" action="loginServlet" method="post">
+        <input class="input" name="username" placeholder="Username or Email" type="text" required />
+        <input class="input" name="password" placeholder="Password" type="password" required />
+        <div class="actions">
+          <div style="display:flex;gap:8px;align-items:center">
+            <input type="checkbox" id="remember" /> 
+            <label for="remember" class="small muted">Remember me</label>
+          </div>
+          <a href="#" class="etr">Forgot?</a>
+        </div>
+        <button type="submit" class="btn">Sign in</button>
+      </form>
+
+      <!-- SIGNUP FORM -->
+      <form id="form-signup" action="signupServlet" method="post" style="display:none">
+        <input class="input" name="fullname" placeholder="Full name" type="text" required />
+        <input class="input" name="username" placeholder="Username or Email" type="text" required />
+        <div class="row">
+          <input class="input" name="password" placeholder="Password" type="password" required />
+          <input class="input" name="confirm" placeholder="Confirm password" type="password" required />
+        </div>
+        <button type="submit" class="btn">Create Account</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const tabLogin = document.getElementById('tab-login');
+    const tabSignup = document.getElementById('tab-signup');
+    const formLogin = document.getElementById('form-login');
+    const formSignup = document.getElementById('form-signup');
+
+    tabLogin.addEventListener('click', () => {
+      tabLogin.classList.add('active');
+      tabSignup.classList.remove('active');
+      formLogin.style.display = 'grid';
+      formSignup.style.display = 'none';
+    });
+
+    tabSignup.addEventListener('click', () => {
+      tabSignup.classList.add('active');
+      tabLogin.classList.remove('active');
+      formSignup.style.display = 'grid';
+      formLogin.style.display = 'none';
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+// Show signup form
+function showSignup() {
+  document.getElementById("loginForm").style.display = "none";
+  document.getElementById("signupForm").style.display = "block";
+  document.getElementById("otpForm").style.display = "none";
+}
+
+// Show login form
+function showLogin() {
+  document.getElementById("signupForm").style.display = "none";
+  document.getElementById("otpForm").style.display = "none";
+  document.getElementById("loginForm").style.display = "block";
+}
+
+// Show OTP form
+function sendOTP() {
+  let phone = document.getElementById("phone").value;
+  if (phone === "") {
+    alert("Please enter your phone number first.");
+    return;
+  }
+
+  // 🔹 (Future: call servlet or API to send OTP)
+  alert("OTP sent to " + phone);
+
+  document.getElementById("signupForm").style.display = "none";
+  document.getElementById("otpForm").style.display = "block";
+}
+
+// Verify OTP
+function verifyOTP() {
+  let otp = document.getElementById("otpInput").value;
+
+  // ✅ Replace "1234" with real backend OTP logic later
+  if (otp === "1234") {
+    alert("Signup Successful!");
+    // 🔹 Redirect to home page
+    window.location.href = "home_page.html";
+  } else {
+    alert("Invalid OTP! Try again.");
+  }
+}
+
+// Show login first by default
+showLogin();
